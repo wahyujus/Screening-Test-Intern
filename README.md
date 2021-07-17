@@ -8,8 +8,7 @@ Android :
 
 IOS :
 
-<img alt="1" width="200" src="./screenshot/IOS/Simulator Screen Shot - iPhone 
-11 - 2021-07-17 at 17.57.17.png" />
+<img alt="1" width="200" src="./screenshot/IOS/Simulator Screen Shot - iPhone 11 - 2021-07-17 at 17.57.17.png" />
 <img alt="1" width="200" src="./screenshot/IOS/Simulator Screen Shot - iPhone 11 - 2021-07-17 at 17.58.10.png" />
 <img alt="1" width="200" src="./screenshot/IOS/Simulator Screen Shot - iPhone 11 - 2021-07-17 at 17.58.01.png" />
 <img alt="1" width="200" src="./screenshot/IOS/Simulator Screen Shot - iPhone 11 - 2021-07-17 at 17.58.07.png" />
