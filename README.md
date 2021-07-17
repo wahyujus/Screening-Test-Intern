@@ -4,10 +4,7 @@
 
 Android :
 
-<img alt="1" width="200" src="./screenshot/Android/Screenshot_1626519212.png" />
-<img alt="1" width="200" src="./screenshot/Android/Screenshot_1626519233.png" />
-<img alt="1" width="200" src="./screenshot/Android/Screenshot_1626519224.png" />
-<img alt="1" width="200" src="./screenshot/Android/Screenshot_1626519230.png" />
+<img alt="1" width="200" src="./screenshot/Android/Screenshot_1626519212.png" /><img alt="1" width="200" src="./screenshot/Android/Screenshot_1626519233.png" /><img alt="1" width="200" src="./screenshot/Android/Screenshot_1626519224.png" /><img alt="1" width="200" src="./screenshot/Android/Screenshot_1626519230.png" />
 
 IOS :
 
