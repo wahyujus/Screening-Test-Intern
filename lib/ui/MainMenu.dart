@@ -14,7 +14,7 @@ class MainMenu extends StatelessWidget {
       children: [
         Image.asset(
           'assets/bg_validation.png',
-          fit: BoxFit.fill,
+          fit: BoxFit.fitHeight,
         ),
         Scaffold(
           backgroundColor: Colors.transparent,

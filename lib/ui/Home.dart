@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
       children: [
         Image.asset(
           'assets/bg_validation.png',
-          fit: BoxFit.cover,
+          fit: BoxFit.fitHeight,
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
