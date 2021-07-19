@@ -17,6 +17,12 @@ class Event extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
+              // Get.to(() => EventMap());
+            },
+            icon: Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () {
               Get.to(() => EventMap());
             },
             icon: Icon(Icons.add),
@@ -33,17 +39,57 @@ class Event extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   var listItem = eventController.eventModel.value[index];
                   return ListTile(
-                    leading: CircleAvatar(
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(listItem.name ?? '-'),
+                        Text(
+                          UserController.dateFormatter.format(listItem.date),
+                          style: TextStyle(color: Colors.yellow),
+                        ),
+                        index.isOdd
+                            ? Container(
+                                color: Colors.blueGrey,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Text('Lorem Ipsum'),
+                                ),
+                              )
+                            : Row(
+                                children: [
+                                  Container(
+                                    color: Colors.blueGrey,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Text('Lorem Ipsum'),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Container(
+                                    color: Colors.blueGrey,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Text('Lorem Ipsum'),
+                                    ),
+                                  ),
+                                ],
+                              )
+                      ],
+                    ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Text(
+                          'Ullamco qui qui consequat dolore sint dolor quis ipsum ea commodo qui tempor non.'),
+                    ),
+                    trailing: CircleAvatar(
                       maxRadius: 30,
                       backgroundImage: Image.network(
                         listItem.image ?? '',
                         fit: BoxFit.fitHeight,
                       ).image,
                     ),
-                    title: Text(listItem.name ?? '-'),
-                    subtitle: Text(
-                        UserController.dateFormatter.format(listItem.date)),
-                    trailing: Icon(Icons.chevron_right_rounded),
                     onTap: () {
                       Get.back();
                       userController.event.value = listItem.name;

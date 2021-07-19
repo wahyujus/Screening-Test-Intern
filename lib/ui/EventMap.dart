@@ -28,19 +28,14 @@ class _EventMapState extends State<EventMap> with TickerProviderStateMixin {
   }
 
   void _animatedMapMove(LatLng destLocation, double destZoom) {
-    // Create some tweens. These serve to split up the transition from one location to another.
-    // In our case, we want to split the transition be<tween> our current map center and the destination.
     final _latTween = Tween<double>(
         begin: mapController.center.latitude, end: destLocation.latitude);
     final _lngTween = Tween<double>(
         begin: mapController.center.longitude, end: destLocation.longitude);
     final _zoomTween = Tween<double>(begin: mapController.zoom, end: destZoom);
 
-    // Create a animation controller that has a duration and a TickerProvider.
     var controller = AnimationController(
         duration: const Duration(milliseconds: 500), vsync: this);
-    // The animation determines what path the animation will take. You can try different Curves values, although I found
-    // fastOutSlowIn to be my favorite.
     Animation<double> animation =
         CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
 
