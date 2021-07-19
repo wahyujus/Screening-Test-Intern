@@ -17,9 +17,9 @@ class GuestModel {
     this.birthdate,
   });
 
-  int? id;
-  String? name;
-  DateTime? birthdate;
+  int id;
+  String name;
+  DateTime birthdate;
 
   factory GuestModel.fromJson(Map<String, dynamic> json) => GuestModel(
         id: json["id"] == null ? null : json["id"],
@@ -34,6 +34,6 @@ class GuestModel {
         "name": name == null ? null : name,
         "birthdate": birthdate == null
             ? null
-            : "${birthdate!.year.toString().padLeft(4, '0')}-${birthdate!.month.toString().padLeft(2, '0')}-${birthdate!.day.toString().padLeft(2, '0')}",
+            : "${birthdate.year.toString().padLeft(4, '0')}-${birthdate.month.toString().padLeft(2, '0')}-${birthdate.day.toString().padLeft(2, '0')}",
       };
 }

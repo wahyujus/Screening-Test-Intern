@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:first_phase/controller/EventController.dart';
 import 'package:first_phase/controller/GuestController.dart';
 import 'package:first_phase/controller/UserController.dart';
@@ -11,6 +13,38 @@ class Guest extends StatelessWidget {
     final userController = Get.put(UserController());
     final guestController = Get.put(GuestController());
 
+    String kelipatan2(int day) {
+      if (day % 2 == 0 && day % 3 == 0) {
+        return 'IOS';
+      } else if (day % 2 == 0) {
+        return 'blackberry';
+      } else if (day % 3 == 0) {
+        return 'android';
+      } else {
+        return 'feature phone';
+      }
+    }
+
+    String primeNum(int testPrime) {
+      int startingPoint = 1;
+      int endPoint = 0;
+      int factors = 0;
+
+      endPoint = testPrime;
+      for (startingPoint; startingPoint <= sqrt(endPoint); startingPoint++) {
+        if (endPoint % startingPoint == 0) {
+          factors++;
+        }
+      }
+      if (factors <= 2) {
+        print('$endPoint is prime.');
+        return 'prime';
+      } else {
+        print('$endPoint is not prime.');
+        return 'not prime';
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('GUEST'),
@@ -21,57 +55,55 @@ class Guest extends StatelessWidget {
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemCount: guestController.guestModel.value.length,
-                itemBuilder: (BuildContext context, int index) {
-                  var listItem = guestController.guestModel.value[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: InkWell(
-                      onTap: () {
-                        Get.back();
-                        userController.guest.value = listItem.name!;
-                        EasyLoading.showToast(
-                            listItem.birthdate!.day % 2 == 0 &&
-                                    listItem.birthdate!.day % 3 == 0
-                                ? 'IOS'
-                                : listItem.birthdate!.day % 2 == 0
-                                    ? 'blackberry'
-                                    : listItem.birthdate!.day % 3 == 0
-                                        ? 'android'
-                                        : 'feature phone',
-                            toastPosition: EasyLoadingToastPosition.bottom);
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Colors.black26,
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              maxRadius: 30,
-                              child: Icon(Icons.person),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(listItem.name ?? '-'),
-                            Text(
-                              UserController.dateFormatter
-                                  .format(listItem.birthdate!),
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          ],
+            : RefreshIndicator(
+                onRefresh: () {
+                  return guestController.fetchGuest();
+                },
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  itemCount: guestController.guestModel.value.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    var listItem = guestController.guestModel.value[index];
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onTap: () {
+                          Get.back();
+                          userController.guest.value = listItem.name;
+                          EasyLoading.showToast(
+                              '${kelipatan2(listItem.birthdate.day)} | ${primeNum(listItem.birthdate.month)}',
+                              toastPosition: EasyLoadingToastPosition.bottom);
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Colors.black26,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                maxRadius: 30,
+                                child: Icon(Icons.person),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(listItem.name ?? '-'),
+                              Text(
+                                UserController.dateFormatter
+                                    .format(listItem.birthdate),
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
       ),
     );

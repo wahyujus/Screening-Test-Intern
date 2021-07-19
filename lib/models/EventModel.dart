@@ -18,10 +18,10 @@ class EventModel {
     this.image,
   });
 
-  int? id;
-  String? name;
-  DateTime? date;
-  String? image;
+  int id;
+  String name;
+  DateTime date;
+  String image;
 
   factory EventModel.fromJson(Map<String, dynamic> json) => EventModel(
         id: json["id"] == null ? null : json["id"],
@@ -33,7 +33,7 @@ class EventModel {
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
         "name": name == null ? null : name,
-        "date": date == null ? null : date!.toIso8601String(),
+        "date": date == null ? null : date.toIso8601String(),
         "image": image == null ? null : image,
       };
 }

@@ -6,12 +6,19 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController namaController = TextEditingController();
     final userController = Get.put(UserController());
+
+    bool isPanlindrome(String word) {
+      for (int i = 0; i < word.length ~/ 2; i++) {
+        if (word[i] != word[word.length - i - 1]) return false;
+      }
+      return true;
+    }
 
     return Stack(
       fit: StackFit.expand,
@@ -47,6 +54,9 @@ class Home extends StatelessWidget {
                   } else {
                     Get.to(() => MainMenu());
                     userController.nama.value = namaController.text;
+                    EasyLoading.showInfo(isPanlindrome(namaController.text)
+                        ? 'isPalindrome'
+                        : 'not palindrome');
                   }
                 })
               ],

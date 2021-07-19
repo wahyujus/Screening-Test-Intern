@@ -33,11 +33,11 @@ class Event extends StatelessWidget {
                     ),
                     title: Text(listItem.name ?? '-'),
                     subtitle: Text(
-                        UserController.dateFormatter.format(listItem.date!)),
+                        UserController.dateFormatter.format(listItem.date)),
                     trailing: Icon(Icons.chevron_right_rounded),
                     onTap: () {
                       Get.back();
-                      userController.event.value = listItem.name!;
+                      userController.event.value = listItem.name;
                     },
                   );
                 },
