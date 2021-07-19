@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:first_phase/controller/UserController.dart';
 import 'package:first_phase/ui/Components.dart';
 import 'package:first_phase/ui/Event.dart';
@@ -30,6 +32,23 @@ class MainMenu extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Obx(() => CircleAvatar(
+                        maxRadius: 70,
+                        backgroundColor: Colors.white30,
+                        child: userController.myImg.isEmpty
+                            ? Icon(
+                                Icons.person_add,
+                                size: 50,
+                                color: Colors.white,
+                              )
+                            : null,
+                        backgroundImage: userController.myImg.isEmpty
+                            ? null
+                            : Image.file(File(userController.myImg.value))
+                                .image)),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -44,13 +63,13 @@ class MainMenu extends StatelessWidget {
                     ),
                     Components.btn(
                         userController.event.value.isEmpty
-                            ? 'pilih event'
+                            ? 'pilih event'.toUpperCase()
                             : userController.event.value, () {
                       Get.to(() => Event());
                     }),
                     Components.btn(
                         userController.guest.value.isEmpty
-                            ? 'pilih guest'
+                            ? 'pilih guest'.toUpperCase()
                             : userController.guest.value, () {
                       Get.to(() => Guest());
                     }),

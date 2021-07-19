@@ -1,5 +1,6 @@
 import 'package:first_phase/controller/EventController.dart';
 import 'package:first_phase/controller/UserController.dart';
+import 'package:first_phase/ui/EventMap.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,14 @@ class Event extends StatelessWidget {
       appBar: AppBar(
         title: Text('EVENT'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.to(() => EventMap());
+            },
+            icon: Icon(Icons.add),
+          ),
+        ],
       ),
       body: Obx(
         () => eventController.eventModel.value.isEmpty
